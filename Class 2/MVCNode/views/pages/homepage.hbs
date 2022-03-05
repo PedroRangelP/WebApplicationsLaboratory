@@ -1,2 +1,32 @@
 <h1>Hello MVC</h1>
 <p>This is my first page</p>
+
+<ul>
+  {{#each products}}
+    <li>{{this.name}}</li>
+  {{/each}}
+</ul>
+<table>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>price</th>
+    <th>description</th>
+    <th>created_at</th>
+    <th>updated_at</th>
+  </tr>
+  {{#each products}}
+    <tr>
+      <td>{{this.id}}</td>
+      <td><a href="/products/{{this.id}}">{{this.name}}</a></td>
+      <td>{{this.price}}</td>
+      <td>{{this.description}}</td>
+      <td>{{this.created_at}}</td>
+      <td>{{this.updated_at}}</td>
+    </tr>
+  {{/each}}
+</table>
+
+<a href="/products/create">Add new product</a>
+
+<a href="/about">Learn about us</a>

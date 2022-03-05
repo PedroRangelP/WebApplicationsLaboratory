@@ -3,6 +3,15 @@ let express = require('express');
 // Obtiene una instancia de express
 let app = express();
 
+// Sobreescribe el método de envío
+let methodOverride = require('method-override')
+// sobreescribe el método POST
+app.use(methodOverride('_method'))
+
+// Importa el modulo para leer el input del usuario
+let bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
 // Importa las configuraciones
 let appRoutes = require('./routes/app');
 
