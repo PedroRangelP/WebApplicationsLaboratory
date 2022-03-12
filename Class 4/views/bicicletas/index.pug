@@ -1,0 +1,29 @@
+extends ../layout
+
+block content 
+  h1 Listado bicicletas
+  table.table 
+    thead 
+      tr 
+        th ID
+        th Color
+        th Modelo
+        th Ubicación 
+    tbody 
+      each bicicleta in bicicletas 
+        tr 
+          td= bicicleta.id
+          td= bicicleta.color
+          td= bicicleta.modelo
+          td= bicicleta.ubicacion
+          td
+            form.inline(method='post' action='/bicicletas/'+bicicleta.id+'/delete')
+              input(type="hidden" name='id' value=bicicleta.id)
+              button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
+                = 'Eliminar'
+          td 
+            a(href='bicicletas/'+bicicleta.id+'/update') Editar 
+
+  a(href="/") Home
+  br
+  a(href="/bicicletas/create") Añadir bicicleta
