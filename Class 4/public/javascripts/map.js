@@ -9,4 +9,16 @@ accessToken: 'pk.eyJ1IjoibHVpc2pvc2U1IiwiYSI6ImNsMDc0dDVtMjAza3gzanM4d3J0ZnMzbzg
 }).addTo(map);
  
 //Adding a marker
-L.marker([19.284076,-99.1355524], title='test').addTo(map);
+//L.marker([19.284076,-99.1355524], title='test').addTo(map);
+
+//Ajax para añadir bicicletas
+$.ajax({
+  dataType: "json",
+  url: "api/bicicletas",
+  sucess: function(result) {
+    console.log(result)
+    result.bicicletas.forEach(function(bicicleta){
+      L.marker(bicicleta.ubicacion, {title: bicicleta.modelo}).addTo(map);
+    })
+  }
+})
