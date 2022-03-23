@@ -1,3 +1,4 @@
+let appConfig = require('./configs/app')
 let createError = require('http-errors');
 let express = require('express');
 let path = require('path');

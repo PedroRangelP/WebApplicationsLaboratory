@@ -7,8 +7,10 @@ block content
     br
     h1 Actualizar bicicleta 
     form(action=`/bicicletas/${bicicleta.id}/update` method='POST')
+        input#id(type='hidden' name='id' value=bicicleta.id)
+        
         table.table 
-            tr 
+            //tr 
                 td
                     label(for='id') ID:
                 td
@@ -27,12 +29,14 @@ block content
                 td
                     label(for='lat') Ubicación (lat):
                 td
-                    input#lat(type='text' name='lat' value=bicicleta.ubicacion[0])
+                    //input#lat(type='text' name='lat' value=bicicleta.ubicacion[0])
+                    input#lat(type='text' name='lat' value=bicicleta.lat)
             tr 
                 td
                     label(for='lon') Ubicación (lat):
                 td
-                    input#lon(type='text' name='lon' value=bicicleta.ubicacion[1])
+                    //input#lon(type='text' name='lon' value=bicicleta.ubicacion[1])
+                    input#lon(type='text' name='lon' value=bicicleta.lon)
             tr
                 td 
                 td

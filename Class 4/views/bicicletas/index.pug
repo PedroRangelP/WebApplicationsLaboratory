@@ -15,7 +15,8 @@ block content
           td= bicicleta.id
           td= bicicleta.color
           td= bicicleta.modelo
-          td= bicicleta.ubicacion
+          //td= bicicleta.ubicacion
+          td= bicicleta.lat + ', ' + bicicleta.lon
           td
             form.inline(method='post' action='/bicicletas/'+bicicleta.id+'/delete')
               input(type="hidden" name='id' value=bicicleta.id)
