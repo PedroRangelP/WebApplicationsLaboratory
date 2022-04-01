@@ -32,7 +32,7 @@ Bicicleta.removeById = (id) => {
 //Bicicletas
 let b1 = new Bicicleta(1, 'Rojo', 'BMX', [19.283358657507183, -99.13733333206893])
 let b2 = new Bicicleta(2, 'Blanca', 'Benotto', [19.28585704642429, -99.13522329713123])
-Bicicleta.add(b1)
-Bicicleta.add(b2)
+//Bicicleta.add(b1)
+//Bicicleta.add(b2)
 
 module.exports = Bicicleta

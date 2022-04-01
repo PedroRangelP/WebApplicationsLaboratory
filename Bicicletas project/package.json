@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www"
+    "devstart": "nodemon ./bin/www",
+    "test": "jasmine",
+    "model-test": "jasmine spec/models/bicicleta.spec.js",
+    "api-test": "jasmine spec/api/bicicleta.spec.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -15,9 +18,11 @@
     "knex": "^1.0.4",
     "morgan": "~1.9.1",
     "mysql2": "^2.3.3",
-    "pug": "2.0.0-beta11"
+    "pug": "2.0.0-beta11",
+    "request": "^2.88.2"
   },
   "devDependencies": {
+    "jasmine": "^4.0.2",
     "nodemon": "^2.0.15"
   }
 }
