@@ -5,9 +5,10 @@
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
-    "test": "jasmine",
+    "test-j": "jasmine",
     "model-test": "jasmine spec/models/bicicleta.spec.js",
-    "api-test": "jasmine spec/api/bicicleta.spec.js"
+    "api-test": "jasmine spec/api/bicicleta.spec.js",
+    "test-m": "mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -22,7 +23,9 @@
     "request": "^2.88.2"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
     "jasmine": "^4.0.2",
+    "mocha": "^9.2.2",
     "nodemon": "^2.0.15"
   }
 }

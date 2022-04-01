@@ -1,0 +1,4 @@
+GRANULAR TESTING MOCHA
+
+npm run test-m /path/to/test
+npm run test-m -- --grep searchable string"
