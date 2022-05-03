@@ -1,17 +1,81 @@
-const Bicicleta = require('../../models/bicicleta')
+const mongoDB = require('../../database/mongoConnection')
+const Bicicleta = require('../../models/bicicletamongo')
 const request = require('request')
+let base_url = 'http://localhost:3000/api/bicicletas/'
 
-describe('Bicicletas API', () => {
-  describe('GET Bicicletas', () => {
-    it('Status 200', () => {
-      expect(Bicicleta.allBicicletas.length).toBe(0)
+describe('bicicletas API', () => {
+  beforeAll((done) => {
+    mongoDB.connect()
+    done()
+  })
 
-      let b1 = new Bicicleta(1, 'Rojo', 'BMX', [19.283358657507183, -99.13733333206893])
-      Bicicleta.add(b1)
+  afterEach((done) => {
+    Bicicleta.deleteMany({}, (err, success) => {
+      if (err) console.log(err)
+      done()
+    })
+  })
 
-      request.get('http://localhost:3000/api/bicicletas', (error, response, body) => {
+  afterAll((done) => {
+    mongoDB.disconnect()
+    done()
+  })
+
+  describe('GET BICICLETAS /', () => {
+    it('Status 200', (done) => {
+      request.get(base_url, function(error, response, body) {
+        let res = JSON.parse(body)
         expect(response.statusCode).toBe(200)
+        expect(res.bicicletas.length).toBe(0)
+        done()
       })
     })
   })
+
+  describe('POST BICICLETA /create', () => {
+    it('Status 200', (done) => {
+      let headers = {'content-type' : 'application/json'}
+      let bicicleta = '{"code" : 1, "color": "Rojo", "modelo": "BMX", "lat": -99.13, "lon": 19.28}'
+      request.post({
+        headers: headers,
+        url: base_url + 'create',
+        body: bicicleta
+      }, (error, response, body) => {
+        expect(response.statusCode).toBe(200)
+        let bicicletaRes = JSON.parse(body).bicicleta
+        expect(bicicletaRes.color).toBe('Rojo')
+        expect(bicicletaRes.ubicacion[0]).toBe(-99.13)
+        expect(bicicletaRes.ubicacion[1]).toBe(19.28)
+        done()
+      })
+    })
+  })
+
+  describe('POST BICICLETA /delete', () => {
+    it('Status 200', (done) => {
+      let headers = {'content-type' : 'application/json'}
+      let bicicleta = '{"code" : 1, "color": "Rojo", "modelo": "BMX", "lat": -99.13, "lon": 19.28}'
+      request.post({
+        headers: headers,
+        url: base_url + 'create',
+        body: bicicleta
+      }, (error, response, body) => {
+        request.post({
+          headers: headers,
+          url: base_url + 'delete',
+          body: '{"code" : 1}'
+        }, (error, response, body) => {
+          expect(response.statusCode).toBe(204)
+          
+          request.get(base_url, function(error, response, body) {
+            let res = JSON.parse(body)
+            expect(response.statusCode).toBe(200)
+            expect(res.bicicletas.length).toBe(0)
+            done()
+          })
+        })
+      })
+    })
+  })
+
 })
