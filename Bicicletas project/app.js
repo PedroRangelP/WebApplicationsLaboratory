@@ -10,6 +10,8 @@ let indexRouter = require('./routes/index')
 let usersRouter = require('./routes/users')
 let bicicletaRouter = require('./routes/bicicleta')
 let bicicletaAPI = require('./routes/api/bicicleta')
+let usuarioRouter = require('./routes/usuario')
+let usuarioAPI = require('./routes/api/usuario')
 
 // MongoDB
 mongoDB.connect()
@@ -30,6 +32,8 @@ app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/bicicletas', bicicletaRouter)
 app.use('/api/bicicletas', bicicletaAPI)
+app.use('/usuarios', usuarioRouter)
+app.use('/api/usuarios', usuarioAPI)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
