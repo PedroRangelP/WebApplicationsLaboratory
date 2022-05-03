@@ -1,21 +1,24 @@
-const Bicicleta = require('../../models/bicicleta')
+const Bicicleta = require('../../models/bicicletamongo')
 
 exports.bicicleta_list = (req, res) => {
-  res.status(200).json({
-    bicicletas: Bicicleta.allBicicletas
+  Bicicleta.allBicicletas((err, bicicletas) => {
+    res.status(200).json({
+      bicicletas: bicicletas
+    })
   })
 }
 
 exports.bicicleta_create = (req, res) => {
-  let bicicleta = new Bicicleta(req.body.id, req.body.color, req.body.modelo)
-  bicicleta.ubicacion = [req.body.lat, req.body.lon]
-  Bicicleta.add(bicicleta)
-  res.status(200).json({
-    bicicleta: bicicleta
+  let bicicleta = Bicicleta.createBicicleta(req.body.code, req.body.color, req.body.modelo, [req.body.lat, req.body.lon])
+  Bicicleta.add(bicicleta, (err, newBicicleta) => {
+    res.status(200).json({
+      bicicleta: newBicicleta
+    })
   })
 }
 
 exports.bicicleta_delete = (req, res) => {
-  Bicicleta.removeById(req.body.id)
-  res.status(204).send()
+  Bicicleta.removeByCode(req.body.code, (err, cb) => {
+    res.status(204).send()
+  })
 }

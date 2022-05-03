@@ -5,25 +5,24 @@ block content
   table.table 
     thead 
       tr 
-        th ID
+        th Code
         th Color
         th Modelo
         th Ubicación 
     tbody 
       each bicicleta in bicicletas 
         tr 
-          td= bicicleta.id
+          td= bicicleta.code
           td= bicicleta.color
           td= bicicleta.modelo
-          //td= bicicleta.ubicacion
-          td= bicicleta.lat + ', ' + bicicleta.lon
+          td= bicicleta.ubicacion
           td
-            form.inline(method='post' action='/bicicletas/'+bicicleta.id+'/delete')
-              input(type="hidden" name='id' value=bicicleta.id)
+            form.inline(method='post' action='/bicicletas/'+bicicleta.code+'/delete')
+              input(type="hidden" name='id' value=bicicleta.code)
               button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
                 = 'Eliminar'
           td 
-            a(href='/bicicletas/'+bicicleta.id+'/update') Editar 
+            a(href='/bicicletas/'+bicicleta.code+'/update') Editar 
 
   a(href="/") Home
   br
