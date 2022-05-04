@@ -14,10 +14,25 @@ let usuarioRouter = require('./routes/usuario')
 let usuarioAPI = require('./routes/api/usuario')
 let tokenRouter = require('./routes/token')
 
+// Login
+let passport = require('./configs/passport')
+let session = require('express-session')
+
 // MongoDB
 mongoDB.connect()
 
+const store = new session.MemoryStore
+
 let app = express()
+
+// Passport
+app.use(session({
+  cookie: {maxAge: 5 * 60 * 60 * 1000}, //5hrs
+  store: store,
+  saveUninitialized: true,
+  resave: true,
+  secret: 'secrettogenerateidsession'
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -28,6 +43,10 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Use passport
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)

@@ -83,6 +83,7 @@ usuario.methods.enviar_mail_bienvenida = function (cb) {
       if(err) { return console.log(err.message) }
 
       console.log('Se envió un mail de confirmación a: ' + email_destination)
+      console.log(`Link verfificacion: http://localhost:3000/token/confirmation/${token.token}`)
     })
 })
 }
