@@ -8,7 +8,7 @@
     "test-j": "jasmine",
     "model-test": "jasmine spec/models/bicicleta.spec.js",
     "api-test": "jasmine spec/api/bicicleta.spec.js",
-    "test-m": "mocha"
+    "mochatest": "mocha"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
