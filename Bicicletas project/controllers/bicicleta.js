@@ -30,12 +30,14 @@ exports.bicicleta_update_get = (req, res) => {
 }
 
 exports.bicicleta_update_post = (req, res) => {
-  Bicicleta.updateOne({ code: req.params.id }, {
+  let update_values =  {
     code: req.body.id,
     color: req.body.color,
     modelo: req.body.modelo,
     ubicacion: [req.body.lon, req.body.lat]
-  }).then(() => {
+  }
+
+  Bicicleta.findOneAndUpdate({ code: req.params.id }, update_values, (err, bicicleta) => {
     res.redirect('/bicicletas')
   })
 }
