@@ -12,6 +12,7 @@ let bicicletaRouter = require('./routes/bicicleta')
 let bicicletaAPI = require('./routes/api/bicicleta')
 let usuarioRouter = require('./routes/usuario')
 let usuarioAPI = require('./routes/api/usuario')
+let tokenRouter = require('./routes/token')
 
 // MongoDB
 mongoDB.connect()
@@ -34,6 +35,7 @@ app.use('/bicicletas', bicicletaRouter)
 app.use('/api/bicicletas', bicicletaAPI)
 app.use('/usuarios', usuarioRouter)
 app.use('/api/usuarios', usuarioAPI)
+app.use('/token', tokenRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

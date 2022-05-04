@@ -4,6 +4,10 @@ const Reserva = require('./reservamongo')
 const uniqueValidator = require('mongoose-unique-validator')
 const bcrypt = require('bcrypt')
 const saltRounds = 10
+const crypto = require('crypto')
+
+const mailer = require('../mailer/mailer')
+const Token = require('../models/token')
 
 let Schema = mongoose.Schema
 
@@ -61,6 +65,26 @@ usuario.methods.reservar = function (bicicletaId, desde, hasta, cb) {
   })
 
   reserva.save(cb)
+}
+
+usuario.methods.enviar_mail_bienvenida = function (cb) {
+  const token = new Token({_userId: this.id, token: crypto.randomBytes(16).toString('hex')})
+  const email_destination = this.email
+  token.save(function (err) {
+    if(err) { return console.log(err.message) }
+    const mailOptions = {
+      from: 'no-reply@easybici.com',
+      to: email_destination,
+      subject: 'Verificación de cuenta en easybici.com',
+      text: 'Hola,\n\nPor favor, para verificar su cuenta haga clic en el siguiente enlace: \n' + 'http://localhost:3000' + '\/token/confirmation\/' + token.token + '\n'
+    }
+
+    mailer.sendMail(mailOptions, function(err){
+      if(err) { return console.log(err.message) }
+
+      console.log('Se envió un mail de confirmación a: ' + email_destination)
+    })
+})
 }
 
 module.exports = mongoose.model('usuarios', usuario)
