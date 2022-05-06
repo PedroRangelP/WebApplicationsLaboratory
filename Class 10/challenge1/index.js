@@ -8,3 +8,24 @@ Añade en algún lugar el logo de React (incluído en la carpeta)
 
 */
 
+const Page = () => {
+  return (
+    <div>
+      <ul>
+        <li>Es de código abierto y tiene una comunidad sólida</li>
+        <li>JSX permite estructurar mejor los componentes</li>
+        <li>Diseño modular</li>
+        <li>Parte de JavaScript</li>
+      </ul>
+      <img src="./react.svg"/>
+    </div>
+    
+  )
+}
+
+ReactDOM.render(
+  <React.Fragment>
+    <Page />
+  </React.Fragment>,
+  document.getElementById("root")
+)
