@@ -1,0 +1,41 @@
+extends ../layout
+
+block content 
+  h1 Listado bicicletas
+  table.table 
+    thead 
+      tr 
+        th Code
+        th Color
+        th Modelo
+        th Ubicación 
+    tbody 
+      each bicicleta in bicicletas 
+        tr 
+          td= bicicleta.code
+          td= bicicleta.color
+          td= bicicleta.modelo
+          td= bicicleta.ubicacion
+          td
+            form.inline(method='post' action='/bicicletas/reservar')
+              input(type="hidden" name='id' value=bicicleta.code)
+              input(type="hidden" name='uid' value=uid)
+              button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
+                = 'Reservar'
+  h1 Reservas 
+  table.table 
+    thead 
+      tr 
+        th Desde
+        th Hasta
+        th Usuario
+        th Bicicleta 
+    tbody 
+      each reserva in reservas 
+        tr 
+          td= reserva.desde
+          td= reserva.hasta
+          td= reserva.usuario
+          td= reserva.bicicleta
+
+  a(href="/") Home

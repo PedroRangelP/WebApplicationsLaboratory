@@ -21,16 +21,16 @@ let session = require('express-session')
 // MongoDB
 mongoDB.connect()
 
-const store = new session.MemoryStore
+//const store = new session.MemoryStore
 
 let app = express()
 
-// Passport
+// Session
 app.use(session({
   cookie: {maxAge: 5 * 60 * 60 * 1000}, //5hrs
-  store: store,
+  //store: store,
   saveUninitialized: true,
-  resave: true,
+  resave: false,
   secret: 'secrettogenerateidsession'
 }))
 
@@ -45,8 +45,8 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 // Use passport
-app.use(passport.initialize())
-app.use(passport.session())
+//app.use(passport.initialize())
+//app.use(passport.session())
 
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
