@@ -1,3 +1,6 @@
+const dotenv = require('dotenv')
+dotenv.config()
+
 let appConfig = require('./configs/app')
 let mongoDB = require('./database/mongoConnection')
 let createError = require('http-errors')

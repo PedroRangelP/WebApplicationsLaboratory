@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
-const mongoDB = 'mongodb+srv://WebApplicationsLaboratory:NgaiLmmpHfx1mzAU@mongodb-cluster.u0629.mongodb.net/redbicicletas'
+
+const mongoDB = process.env.MONGO_URI
 
 exports.connect = async () => {
   try {
